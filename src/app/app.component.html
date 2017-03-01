@@ -1,3 +1,59 @@
 <h1>
   {{title}}
 </h1>
+<h2>
+  {{nombre}}
+</h2>
+
+<input type="text" [(ngModel)] = "nombre"/>
+
+<button (click) = "eventoClick()" >Push me!!!</button>
+
+<div *ngFor="let voto of votos">
+  <input-component voto="{{voto.title}}" (addVoto)="addVoto($event)"></input-component>
+</div>
+
+<h3 gigant highlight>{{votacion}}</h3>
+
+<h2>Conversor</h2>
+<div>Cantidad: <input [(ngModel)]="cantidad"/></div>
+<div>$ es : <input [(ngModel)]="factor"/></div>
+<p>
+  oh es: {{cantidad | conversorPipe:factor}}
+</p>
+
+
+<ul>
+  <li *ngFor="let ticket of tickets" gigant>
+    <b>Ticket N:{{ticket.id}}</b> - {{ticket.titulo}}
+    <span highlight>[{{ticket.estado}}]</span> 
+  </li>
+</ul>
+
+<!--<form #f="ngForm" (ngSubmit)="onSubmit(f.value)">-->
+<form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)">
+  <div>
+    <label for="nameInput">Nombre</label>
+    <input type="text" id="nameInput" placeholder="Nombre" name="nombre" [formControl]="myForm.controls['name']"/>
+  </div>
+  <!--<div>
+    <label for="apellidoInput">Apellido</label>
+    <input type="text" id="apellidoInput" placeholder="Apellido" name="apellido" ngModel/>
+  </div>
+  <div>
+    <label for="twitterInput">Twitter</label>
+    <input type="text" id="twitterInput" placeholder="Twitter" name="twitter" ngModel/>
+  </div>-->
+  <button type="submit">Submit</button>
+</form>
+
+<button (click)="increment()">Incrementar</button>
+<div>Counter: {{counter | async}}</div>
+<button (click)="decrement()">Decrementar</button>
+<button (click)="reset()">Reset</button>
+
+<p gigant>Progress: {{progress}}%</p>
+<p gigant *ngIf="progress >= 100">Done processing {{label}} of angularzone!</p>
+
+<button gigant (click)="processWithinAngularZone()">Con Angular Zone</button>
+<button gigant (click)="processOutsideOfAngularZone()">Sin Angular Zone</button>
